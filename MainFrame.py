@@ -1,6 +1,7 @@
 import tkinter as tk
 
 from MovingText import MovingText
+from UserEntry import UserEntry
 
 
 class MainFrame(tk.Frame):
@@ -23,6 +24,11 @@ class MainFrame(tk.Frame):
         self.movingText.grid(row=0, column=0)
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
+
+        self.entry = UserEntry(self)
+        self.entry.grid(row=1, column=0)
+        self.grid_rowconfigure(1, weight=1)
+        self.grid_columnconfigure(1, weight=1)
 
 
 
