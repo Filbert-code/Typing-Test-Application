@@ -15,4 +15,4 @@ class TextRowFrame(tk.Frame):
         # self.config(bg='pink')
 
         for i in range(10):
-            tk.Label(self, text=self.text[i] + " ", font=("Courier", 12)).grid(row=0, column=i)
+            tk.Label(self, text=self.text[i] + " ", font=("Courier", 12), bg='grey').grid(row=0, column=i)

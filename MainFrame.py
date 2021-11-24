@@ -18,8 +18,10 @@ class MainFrame(tk.Frame):
         self.grid(row=0, column=0)
         # self.grid_propagate(0)
 
+        # get the data and create an instance of WidgetModel (that holds all persistent data)
         self.text = open("1000MostCommonWords.txt").readlines()
 
+        # configure the subframes
         self.movingText = MovingText(self)
         self.movingText.pack(anchor=tk.CENTER, padx=20, pady=40)
         # self.grid_rowconfigure(0, weight=1)
