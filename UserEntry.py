@@ -8,6 +8,7 @@ class UserEntry(tk.Frame):
 
         # configurations for the outer-most frame
         self.parent = parent
+        self.widgetModel = self.parent.widgetModel
 
         self.config(bg='green', width=200, height=42)
         self.grid_propagate(0)
@@ -19,5 +20,9 @@ class UserEntry(tk.Frame):
         self.update_self()
 
     def update_self(self):
-        self.parent.widgetModel.current_user_input = self.entry.get()
+        self.widgetModel.current_user_input = self.entry.get()
+        if " " in self.entry.get():
+            self.entry.delete(0, tk.END)
+            self.widgetModel.current_word_ind += 1
+
         self.parent.parent.after(100, self.update_self)

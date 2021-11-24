@@ -1,5 +1,7 @@
 import tkinter as tk
 from random import randrange
+from time import sleep
+
 from TextRowFrame import TextRowFrame
 
 
@@ -10,6 +12,7 @@ class MovingText(tk.Frame):
 
         # configurations for the outer-most frame
         self.parent = parent
+        self.widgetModel = self.parent.widgetModel
 
         self.config(bg='black', width=600, height=84)
 
@@ -26,9 +29,11 @@ class MovingText(tk.Frame):
         frames = [f0, f1]
 
         for frame in frames:
+            # max width for each frame is 600
             while frame.winfo_reqwidth() < 601:
+                # need to call in order to get the correct winfo_reqwidth value
                 self.update()
-                label = tk.Label(frame, text=self.parent.widgetModel.row_of_words.pop(), font=("Courier", 12))
+                label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=("Courier", 12))
                 label.pack(side=tk.LEFT)
                 self.labels.append(label)
             # the last label overreaches the boundary, remove it
@@ -39,7 +44,6 @@ class MovingText(tk.Frame):
             frame.grid(row=i, column=0, sticky='w')
 
 
-
         #
         # for i in range(20):
         #     self.labels.append(tk.Label(self, text=self.parent.widgetModel.row_of_words[i], font=("Courier", 12)))
@@ -48,10 +52,6 @@ class MovingText(tk.Frame):
         #     print(self.winfo_reqwidth())
         #     label.pack(side=tk.LEFT)
 
-    # # set the background of the word that the user needs to type out next
-    # def setHighlightedWord(self, index):
-    #
-
     # # create new row of labels if the user gets through the top row
     # def createLabelsUpdate(self):
     #
@@ -59,7 +59,10 @@ class MovingText(tk.Frame):
 
 
     def update_self(self):
-
+        user_input = self.widgetModel.current_user_input
+        if self.widgetModel.current_word_ind != 0:
+            self.labels[self.widgetModel.current_word_ind - 1].config(bg='white')
+        self.labels[self.widgetModel.current_word_ind].config(bg='grey')
         self.parent.parent.after(100, self.update_self)
 
 
