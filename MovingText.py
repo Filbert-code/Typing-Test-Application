@@ -2,8 +2,6 @@ import tkinter as tk
 from random import randrange
 from time import sleep
 
-from TextRowFrame import TextRowFrame
-
 
 class MovingText(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
