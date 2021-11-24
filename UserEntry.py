@@ -13,3 +13,10 @@ class UserEntry(tk.Frame):
 
         self.entry = tk.Entry(self, font=("Courier", 12))
         self.entry.grid(row=0, column=0)
+
+        # update
+        self.update_self()
+
+    def update_self(self):
+        self.parent.widgetModel.current_user_input = self.entry.get()
+        self.parent.parent.after(100, self.update_self)
