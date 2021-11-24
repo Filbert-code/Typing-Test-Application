@@ -18,7 +18,6 @@ class MainFrame(tk.Frame):
         # self.grid_propagate(0)
 
         # get the data and create an instance of WidgetModel (that holds all persistent data)
-        self.text = open("1000MostCommonWords.txt").readlines()
         self.widgetModel = WidgetModel()
 
         # configure the subframes
@@ -27,8 +26,6 @@ class MainFrame(tk.Frame):
 
         self.entry = UserEntry(self)
         self.entry.pack(anchor=tk.CENTER)
-
-
 
 
 if __name__ == "__main__":

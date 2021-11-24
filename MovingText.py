@@ -2,6 +2,7 @@ import tkinter as tk
 from random import randrange
 from TextRowFrame import TextRowFrame
 
+
 class MovingText(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         # parent is the root
@@ -14,18 +15,29 @@ class MovingText(tk.Frame):
         self.grid_propagate(0)
 
         # widgets for the frame
+        self.labels = []
         self.createLabel()
 
+        # update
+        self.update_self()
+
     def createLabel(self):
+        # self.textWidget =
+        for i in range(20):
+            self.labels.append(tk.Label(self, text=self.parent.widgetModel.row_of_words[i], font=("Courier", 12)))
+        for label in self.labels:
+            self.update()
+            print(self.winfo_reqwidth())
+            label.pack(side=tk.LEFT)
 
-        self.textWidgetTop = TextRowFrame(self, self.get10RandomStrings())
-        self.textWidgetTop.grid(row=0, column=0, sticky='w')
-        self.textWidgetBottom = TextRowFrame(self, self.get10RandomStrings())
-        self.textWidgetBottom.grid(row=1, column=0, sticky='w')
+    # # set the background of the word that the user needs to type out next
+    # def setHighlightedWord(self, index):
+    #
 
 
-    def get10RandomStrings(self):
-        strArr = []
-        for i in range(10):
-            strArr.append(self.parent.text[randrange(1000)])
-        return strArr
+
+    def update_self(self):
+
+        self.parent.parent.after(100, self.update_self)
+
+
