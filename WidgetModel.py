@@ -10,7 +10,7 @@ class WidgetModel:
         self.current_frame = None
         self.at_frame_end = False
         # main row of words
-        self.row_of_words = [self.word_bank[randrange(1000)] for num in range(0, 100)]
+        self.row_of_words = [self.word_bank[randrange(1000)] for num in range(0, 500)]
         self.row_of_words = [word[:-1] for word in self.row_of_words]
         self.active_labels = []
 

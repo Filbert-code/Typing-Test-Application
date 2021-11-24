@@ -24,27 +24,28 @@ class MovingText(tk.Frame):
         self.update_self()
 
     def createLabelRows(self):
-        f0 = tk.Frame(self)
-        f1 = tk.Frame(self)
-        self.labelFrames = [f0, f1]
-
-        for frame in self.labelFrames:
-            # max width for each frame is 600
-            while frame.winfo_reqwidth() < 601:
-                # need to call in order to get the correct winfo_reqwidth value
-                self.update()
-                label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=("Courier", 12))
-                label.pack(side=tk.LEFT)
-                self.labels.append(label)
-            # the last label overreaches the boundary, remove it
-            self.labels[-1].destroy()
-            del self.labels[-1]
-            # end label is used to trigger adding a new row of words
-            self.endLabels.append(self.labels[-1])
-            self.widgetModel.active_labels = self.labels
-
+        self.labelFrames = [self.createNextLabelRow(), self.createNextLabelRow()]
         for i, frame in enumerate(self.labelFrames):
             frame.grid(row=i, column=0, sticky='w')
+
+    # returns a new frame with labels of words
+    def createNextLabelRow(self):
+        frame = tk.Frame(self)
+        # max width for each frame is 600
+        while frame.winfo_reqwidth() < 601:
+            # need to call in order to get the correct winfo_reqwidth value
+            self.update()
+            label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=("Courier", 12))
+            label.pack(side=tk.LEFT)
+            self.labels.append(label)
+        # the last label overreaches the boundary, remove it
+        self.labels[-1].destroy()
+        del self.labels[-1]
+        # end label is used to trigger adding a new row of words
+        self.endLabels.append(self.labels[-1])
+        self.widgetModel.active_labels = self.labels
+        return frame
+
 
     # # create new row of labels if the user gets through the top row
     # def createLabelsUpdate(self):
@@ -67,6 +68,10 @@ class MovingText(tk.Frame):
             del self.labelFrames[0]
             self.labelFrames[0].grid(row=0, column=0)
             self.widgetModel.at_frame_end = False
+            new_frame = self.createNextLabelRow()
+            new_frame.grid(row=1, column=0)
+            self.labelFrames.append(new_frame)
+
 
 
         self.parent.parent.after(100, self.update_self)

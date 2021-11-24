@@ -13,8 +13,9 @@ class MainFrame(tk.Frame):
         # configurations for the outer-most frame
         self.parent = parent
         self.parent.title("The Ultimate Typing Test")
-        self.config(bg='lightseagreen', width=800, height=600)
+        self.config(bg='lightseagreen')
         self.grid(row=0, column=0)
+        self.parent.minsize(668, 170)
         # self.grid_propagate(0)
 
         # get the data and create an instance of WidgetModel (that holds all persistent data)
