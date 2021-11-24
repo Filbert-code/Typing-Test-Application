@@ -15,7 +15,9 @@ class MovingText(tk.Frame):
         self.config(bg='black', width=600, height=84)
 
         # widgets for the frame
+        self.labelFrames = []
         self.labels = []
+        self.endLabels = []
         self.createLabelRows()
 
         # update
@@ -24,9 +26,9 @@ class MovingText(tk.Frame):
     def createLabelRows(self):
         f0 = tk.Frame(self)
         f1 = tk.Frame(self)
-        frames = [f0, f1]
+        self.labelFrames = [f0, f1]
 
-        for frame in frames:
+        for frame in self.labelFrames:
             # max width for each frame is 600
             while frame.winfo_reqwidth() < 601:
                 # need to call in order to get the correct winfo_reqwidth value
@@ -37,30 +39,34 @@ class MovingText(tk.Frame):
             # the last label overreaches the boundary, remove it
             self.labels[-1].destroy()
             del self.labels[-1]
+            # end label is used to trigger adding a new row of words
+            self.endLabels.append(self.labels[-1])
+            self.widgetModel.active_labels = self.labels
 
-        for i, frame in enumerate(frames):
+        for i, frame in enumerate(self.labelFrames):
             frame.grid(row=i, column=0, sticky='w')
-
-
-        #
-        # for i in range(20):
-        #     self.labels.append(tk.Label(self, text=self.parent.widgetModel.row_of_words[i], font=("Courier", 12)))
-        # for label in self.labels:
-        #     self.update()
-        #     print(self.winfo_reqwidth())
-        #     label.pack(side=tk.LEFT)
 
     # # create new row of labels if the user gets through the top row
     # def createLabelsUpdate(self):
     #
 
-
-
     def update_self(self):
+        # get user input from WidgetModel
         user_input = self.widgetModel.current_user_input
-        if self.widgetModel.current_word_ind != 0:
+        # update WidgetModel message properties
+        self.widgetModel.current_label = self.labels[self.widgetModel.current_word_ind]
+        self.widgetModel.current_frame = self.labelFrames[0]
+        # change the color of the updated highlighted label/word
+        if self.widgetModel.current_word_ind != 0 and self.labels[self.widgetModel.current_word_ind - 1] != self.endLabels[0]:
             self.labels[self.widgetModel.current_word_ind - 1].config(bg='white')
         self.labels[self.widgetModel.current_word_ind].config(bg='grey')
+
+        # user has reached the end of the frame
+        if self.widgetModel.at_frame_end:
+            frame_to_destroy = self.labelFrames[1]
+            del self.labelFrames[0]
+            self.labelFrames[0].grid(row=0, column=0)
+            self.widgetModel.at_frame_end = False
+
+
         self.parent.parent.after(100, self.update_self)
-
-

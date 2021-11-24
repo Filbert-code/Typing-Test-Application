@@ -15,6 +15,7 @@ class UserEntry(tk.Frame):
 
         self.entry = tk.Entry(self, font=("Courier", 12))
         self.entry.grid(row=0, column=0)
+        self.entry.focus_set()
 
         # update
         self.update_self()
@@ -23,6 +24,9 @@ class UserEntry(tk.Frame):
         self.widgetModel.current_user_input = self.entry.get()
         if " " in self.entry.get():
             self.entry.delete(0, tk.END)
+            # check in the widgetModel if the current entry text matches the word and update the score
+            self.widgetModel.userInputMatchWordCheck()
+            print(self.widgetModel.score)
             self.widgetModel.current_word_ind += 1
 
         self.parent.parent.after(100, self.update_self)
