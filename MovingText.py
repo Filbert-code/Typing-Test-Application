@@ -11,27 +11,49 @@ class MovingText(tk.Frame):
         # configurations for the outer-most frame
         self.parent = parent
 
-        self.config(bg='blue', width=600, height=84)
-        self.grid_propagate(0)
+        self.config(bg='black', width=600, height=84)
 
         # widgets for the frame
         self.labels = []
-        self.createLabel()
+        self.createLabelRows()
 
         # update
         self.update_self()
 
-    def createLabel(self):
-        # self.textWidget =
-        for i in range(20):
-            self.labels.append(tk.Label(self, text=self.parent.widgetModel.row_of_words[i], font=("Courier", 12)))
-        for label in self.labels:
-            self.update()
-            print(self.winfo_reqwidth())
-            label.pack(side=tk.LEFT)
+    def createLabelRows(self):
+        f0 = tk.Frame(self)
+        f1 = tk.Frame(self)
+        frames = [f0, f1]
+
+        for frame in frames:
+            while frame.winfo_reqwidth() < 601:
+                self.update()
+                label = tk.Label(frame, text=self.parent.widgetModel.row_of_words.pop(), font=("Courier", 12))
+                label.pack(side=tk.LEFT)
+                self.labels.append(label)
+            # the last label overreaches the boundary, remove it
+            self.labels[-1].destroy()
+            del self.labels[-1]
+
+        for i, frame in enumerate(frames):
+            frame.grid(row=i, column=0, sticky='w')
+
+
+
+        #
+        # for i in range(20):
+        #     self.labels.append(tk.Label(self, text=self.parent.widgetModel.row_of_words[i], font=("Courier", 12)))
+        # for label in self.labels:
+        #     self.update()
+        #     print(self.winfo_reqwidth())
+        #     label.pack(side=tk.LEFT)
 
     # # set the background of the word that the user needs to type out next
     # def setHighlightedWord(self, index):
+    #
+
+    # # create new row of labels if the user gets through the top row
+    # def createLabelsUpdate(self):
     #
 
 
