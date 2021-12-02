@@ -16,6 +16,7 @@ class UserEntry(tk.Frame):
         self.entry = tk.Entry(self, font=("Courier", 12))
         self.entry.grid(row=0, column=0)
         self.entry.focus_set()
+        self.entry.bind("<Key>", self.userPressedKey)
 
         # update
         self.update_self()
@@ -32,6 +33,10 @@ class UserEntry(tk.Frame):
             self.widgetModel.userInputMatchWordCheck()
             self.widgetModel.current_word_ind += 1
         self.parent.parent.after(100, self.update_self)
+
+    def userPressedKey(self, key):
+        if key.char.isalpha():
+            self.widgetModel.char_count += 1
 
     def reset(self):
         self.entry.config(state='normal')

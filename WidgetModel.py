@@ -19,6 +19,8 @@ class WidgetModel:
         self.ended = False
         self.resetTriggered = False
 
+        self.char_count = 0
+
     def userInputMatchWordCheck(self):
         # print("User input: " + self.current_user_input[:-1] +
         #       ", Word: " + self.active_labels[self.current_word_ind].cget('text'))
@@ -30,7 +32,6 @@ class WidgetModel:
         return False
 
     def userHasReachedFrameEnd(self):
-        print(self.current_frame)
         if not self.current_frame:
             return False
         if self.current_label == self.current_frame.winfo_children()[-1]:
