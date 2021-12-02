@@ -20,6 +20,9 @@ class MovingText(tk.Frame):
         self.endLabels = []
         self.createLabelRows()
 
+        # waiting for player to start
+        self.waitingForStart()
+
         # update
         self.update_self()
 
@@ -46,32 +49,48 @@ class MovingText(tk.Frame):
         self.widgetModel.active_labels = self.labels
         return frame
 
-
-    # # create new row of labels if the user gets through the top row
-    # def createLabelsUpdate(self):
-    #
+    def waitingForStart(self):
+        if not self.widgetModel.started and not self.widgetModel.ended:
+            if self.widgetModel.current_user_input:
+                self.widgetModel.started = True
+        self.parent.parent.after(100, self.waitingForStart)
 
     def update_self(self):
-        # get user input from WidgetModel
-        user_input = self.widgetModel.current_user_input
-        # update WidgetModel message properties
-        self.widgetModel.current_label = self.labels[self.widgetModel.current_word_ind]
-        self.widgetModel.current_frame = self.labelFrames[0]
+        if self.widgetModel.started and not self.widgetModel.ended:
+            # update WidgetModel message properties
+            self.widgetModel.current_label = self.labels[self.widgetModel.current_word_ind]
+            self.widgetModel.current_frame = self.labelFrames[0]
+
+            # user has reached the end of the frame
+            if self.widgetModel.at_frame_end:
+                self.destroyAndCreateRowOfWords()
+            else:
+                self.highlightFocusedWord()
+
+        self.parent.parent.after(100, self.update_self)
+
+    def destroyAndCreateRowOfWords(self):
+        frame_to_destroy = self.labelFrames[0]
+        # destroy the row of words!
+        del self.labelFrames[0]
+        frame_to_destroy.destroy()
+        self.labelFrames[0].grid(row=0, column=0, sticky='w')
+        self.widgetModel.at_frame_end = False
+        # create new row of words
+        new_frame = self.createNextLabelRow()
+        new_frame.grid(row=1, column=0, sticky='w')
+        self.labelFrames.append(new_frame)
+
+    def highlightFocusedWord(self):
         # change the color of the updated highlighted label/word
-        if self.widgetModel.current_word_ind != 0 and self.labels[self.widgetModel.current_word_ind - 1] != self.endLabels[0]:
+        if not self.widgetModel.atFrameBeginning():
             self.labels[self.widgetModel.current_word_ind - 1].config(bg='white')
         self.labels[self.widgetModel.current_word_ind].config(bg='grey')
 
-        # user has reached the end of the frame
-        if self.widgetModel.at_frame_end:
-            frame_to_destroy = self.labelFrames[1]
-            del self.labelFrames[0]
-            self.labelFrames[0].grid(row=0, column=0)
-            self.widgetModel.at_frame_end = False
-            new_frame = self.createNextLabelRow()
-            new_frame.grid(row=1, column=0)
-            self.labelFrames.append(new_frame)
+    def reset(self):
+        self.labelFrames = []
+        self.labels = []
+        self.endLabels = []
+        self.createLabelRows()
 
 
-
-        self.parent.parent.after(100, self.update_self)

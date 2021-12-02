@@ -15,10 +15,13 @@ class WidgetModel:
         self.active_labels = []
 
         self.score = 0
+        self.started = False
+        self.ended = False
+        self.resetTriggered = False
 
     def userInputMatchWordCheck(self):
-        print("User input: " + self.current_user_input[:-1] +
-              ", Word: " + self.active_labels[self.current_word_ind].cget('text'))
+        # print("User input: " + self.current_user_input[:-1] +
+        #       ", Word: " + self.active_labels[self.current_word_ind].cget('text'))
         if self.userHasReachedFrameEnd():
             self.at_frame_end = True
         if self.current_user_input[:-1] == self.active_labels[self.current_word_ind].cget('text'):
@@ -31,4 +34,16 @@ class WidgetModel:
             return True
         return False
 
+    def atFrameBeginning(self):
+        if self.current_label == self.current_frame.winfo_children()[0]:
+            return True
+        return False
+
+    def reset(self):
+        self.score = 0
+        self.started = False
+        self.ended = False
+        self.row_of_words = [self.word_bank[randrange(1000)] for num in range(0, 500)]
+        self.row_of_words = [word[:-1] for word in self.row_of_words]
+        self.active_labels = []
 

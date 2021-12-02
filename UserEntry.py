@@ -21,6 +21,10 @@ class UserEntry(tk.Frame):
         self.update_self()
 
     def update_self(self):
+        # disable the entry once the test has ended
+        if self.widgetModel.ended:
+            self.entry.config(state='disabled')
+            return
         self.widgetModel.current_user_input = self.entry.get()
         if " " in self.entry.get():
             self.entry.delete(0, tk.END)
@@ -30,3 +34,7 @@ class UserEntry(tk.Frame):
             self.widgetModel.current_word_ind += 1
 
         self.parent.parent.after(100, self.update_self)
+
+    def reset(self):
+        self.entry.select_clear()
+        self.entry.config(state='normal')
