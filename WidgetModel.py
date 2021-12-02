@@ -40,6 +40,11 @@ class WidgetModel:
         return False
 
     def reset(self):
+        self.current_user_input = ""
+        self.current_word_ind = 0
+        self.current_label = None
+        self.current_frame = None
+        self.at_frame_end = False
         self.score = 0
         self.started = False
         self.ended = False

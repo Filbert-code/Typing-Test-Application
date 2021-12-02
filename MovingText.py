@@ -7,6 +7,7 @@ class MovingText(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         # parent is the root
         tk.Frame.__init__(self, parent, *args, **kwargs)
+        self.debugNum = 0
 
         # configurations for the outer-most frame
         self.parent = parent
@@ -56,6 +57,8 @@ class MovingText(tk.Frame):
         self.parent.parent.after(100, self.waitingForStart)
 
     def update_self(self):
+        # print("wm.started: {}".format(self.widgetModel.started))
+        # print("wm.ended: {}".format(self.widgetModel.ended))
         if self.widgetModel.started and not self.widgetModel.ended:
             # update WidgetModel message properties
             self.widgetModel.current_label = self.labels[self.widgetModel.current_word_ind]
@@ -92,5 +95,3 @@ class MovingText(tk.Frame):
         self.labels = []
         self.endLabels = []
         self.createLabelRows()
-
-

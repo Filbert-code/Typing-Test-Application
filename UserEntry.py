@@ -32,9 +32,9 @@ class UserEntry(tk.Frame):
             self.widgetModel.userInputMatchWordCheck()
             print(self.widgetModel.score)
             self.widgetModel.current_word_ind += 1
-
         self.parent.parent.after(100, self.update_self)
 
     def reset(self):
-        self.entry.select_clear()
         self.entry.config(state='normal')
+        self.entry.delete(0, tk.END)
+        self.update_self()
