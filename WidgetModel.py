@@ -30,6 +30,9 @@ class WidgetModel:
         return False
 
     def userHasReachedFrameEnd(self):
+        print(self.current_frame)
+        if not self.current_frame:
+            return False
         if self.current_label == self.current_frame.winfo_children()[-1]:
             return True
         return False

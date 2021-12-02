@@ -69,8 +69,7 @@ class MovingText(tk.Frame):
                 self.destroyAndCreateRowOfWords()
             else:
                 self.highlightFocusedWord()
-
-        self.parent.parent.after(100, self.update_self)
+        self.parent.parent.after(25, self.update_self)
 
     def destroyAndCreateRowOfWords(self):
         frame_to_destroy = self.labelFrames[0]
@@ -90,8 +89,14 @@ class MovingText(tk.Frame):
             self.labels[self.widgetModel.current_word_ind - 1].config(bg='white')
         self.labels[self.widgetModel.current_word_ind].config(bg='grey')
 
+    def deleteAllRows(self):
+        for frame in self.labelFrames:
+            frame.destroy()
+
     def reset(self):
+        self.deleteAllRows()
         self.labelFrames = []
         self.labels = []
         self.endLabels = []
         self.createLabelRows()
+

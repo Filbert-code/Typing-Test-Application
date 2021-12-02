@@ -10,8 +10,9 @@ class Timer(tk.Frame):
         self.parent = parent
         self.widgetModel = self.parent.widgetModel
 
+        self.one_minute = 60
         self.time = tk.IntVar()
-        self.time.set(5)
+        self.time.set(self.one_minute)
         self.timerLabel = None
         self.createTimer()
 
@@ -32,5 +33,5 @@ class Timer(tk.Frame):
         self.parent.parent.after(1000, self.updateTime)
 
     def reset(self):
-        self.time.set(5)
-
+        self.time.set(self.one_minute)
+        self.timerLabel.config(text=self.time.get())

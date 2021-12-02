@@ -26,11 +26,10 @@ class UserEntry(tk.Frame):
             self.entry.config(state='disabled')
             return
         self.widgetModel.current_user_input = self.entry.get()
-        if " " in self.entry.get():
+        if " " in self.entry.get() and self.widgetModel.started:
             self.entry.delete(0, tk.END)
             # check in the widgetModel if the current entry text matches the word and update the score
             self.widgetModel.userInputMatchWordCheck()
-            print(self.widgetModel.score)
             self.widgetModel.current_word_ind += 1
         self.parent.parent.after(100, self.update_self)
 
