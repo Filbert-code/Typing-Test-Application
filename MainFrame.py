@@ -2,6 +2,8 @@ import tkinter as tk
 
 from MovingText import MovingText
 from UserEntry import UserEntry
+from Timer import Timer
+from RetryButton import RetryButton
 from WidgetModel import WidgetModel
 
 
@@ -22,11 +24,23 @@ class MainFrame(tk.Frame):
         self.widgetModel = WidgetModel()
 
         # configure the subframes
+        self.timer = Timer(self)
+        self.timer.pack(anchor=tk.CENTER)
+        
         self.movingText = MovingText(self)
         self.movingText.pack(anchor=tk.CENTER, padx=20, pady=40)
 
+        self.retryButton = RetryButton(self)
+        self.retryButton.pack(anchor=tk.CENTER)
+
         self.entry = UserEntry(self)
         self.entry.pack(anchor=tk.CENTER)
+
+    def totalReset(self):
+        self.widgetModel.reset()
+        self.movingText.reset()
+        self.entry.reset()
+        self.timer.reset()
 
 
 if __name__ == "__main__":
