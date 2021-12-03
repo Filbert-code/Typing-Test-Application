@@ -10,7 +10,7 @@ class UserEntry(tk.Frame):
         self.parent = parent
         self.widgetModel = self.parent.widgetModel
 
-        self.config(bg='green', width=200, height=42)
+        self.config(bg='lightseagreen', width=200, height=42)
         self.grid_propagate(0)
 
         self.entry = tk.Entry(self, font=("Courier", 12))

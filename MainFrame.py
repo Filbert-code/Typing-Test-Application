@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import font
 
 from MovingText import MovingText
 from UserEntry import UserEntry
@@ -20,6 +21,7 @@ class MainFrame(tk.Frame):
         self.grid(row=0, column=0)
         self.parent.minsize(668, 170)
         # self.grid_propagate(0)
+        print(font.names())
 
         # get the data and create an instance of WidgetModel (that holds all persistent data)
         self.widgetModel = WidgetModel()
@@ -30,6 +32,7 @@ class MainFrame(tk.Frame):
         
         self.movingText = MovingText(self)
         self.movingText.pack(anchor=tk.CENTER, padx=20, pady=(40, 0))
+        self.movingText.grid_propagate(0)
 
         self.statsFrame = StatsFrame(self)
         self.statsFrame.pack(anchor=tk.CENTER, pady=40)

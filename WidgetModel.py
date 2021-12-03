@@ -52,7 +52,9 @@ class WidgetModel:
         self.current_label = None
         self.current_frame = None
         self.at_frame_end = False
-        self.score = 0
+        self.char_count = 0
+        self.mistyped_count = 0
+        self.previousWordIncorrect = False
         self.started = False
         self.ended = False
         self.row_of_words = [self.word_bank[randrange(1000)] for num in range(0, 500)]
