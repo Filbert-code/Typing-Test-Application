@@ -4,6 +4,7 @@ from MovingText import MovingText
 from UserEntry import UserEntry
 from Timer import Timer
 from RetryButton import RetryButton
+from StatsFrame import StatsFrame
 from WidgetModel import WidgetModel
 
 
@@ -28,13 +29,17 @@ class MainFrame(tk.Frame):
         self.timer.pack(anchor=tk.CENTER)
         
         self.movingText = MovingText(self)
-        self.movingText.pack(anchor=tk.CENTER, padx=20, pady=40)
+        self.movingText.pack(anchor=tk.CENTER, padx=20, pady=(40, 0))
+
+        self.statsFrame = StatsFrame(self)
+        self.statsFrame.pack(anchor=tk.CENTER, pady=40)
 
         self.retryButton = RetryButton(self)
         self.retryButton.pack(anchor=tk.CENTER)
 
         self.entry = UserEntry(self)
         self.entry.pack(anchor=tk.CENTER)
+
 
     def totalReset(self):
         self.widgetModel.reset()
