@@ -10,7 +10,7 @@ class Timer(tk.Frame):
         self.parent = parent
         self.widgetModel = self.parent.widgetModel
 
-        self.one_minute = 30
+        self.one_minute = 60
         self.time = tk.IntVar()
         self.time.set(self.one_minute)
         self.timerLabel = None

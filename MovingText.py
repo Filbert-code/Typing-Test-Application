@@ -39,7 +39,7 @@ class MovingText(tk.Frame):
         while frame.winfo_reqwidth() < 601:
             # need to call in order to get the correct winfo_reqwidth value
             self.update()
-            label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=("Courier", 12))
+            label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=("Courier", 15))
             label.pack(side=tk.LEFT)
             self.labels.append(label)
         # the last label overreaches the boundary, remove it
