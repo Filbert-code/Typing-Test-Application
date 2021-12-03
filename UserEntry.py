@@ -30,6 +30,7 @@ class UserEntry(tk.Frame):
         if " " in self.entry.get() and self.widgetModel.started:
             self.entry.delete(0, tk.END)
             # check in the widgetModel if the current entry text matches the word and update the score
+            self.widgetModel.previousWordIncorrect = False
             self.widgetModel.userInputMatchWordCheck()
             self.widgetModel.current_word_ind += 1
         self.parent.parent.after(100, self.update_self)

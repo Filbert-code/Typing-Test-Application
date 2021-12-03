@@ -86,7 +86,10 @@ class MovingText(tk.Frame):
     def highlightFocusedWord(self):
         # change the color of the updated highlighted label/word
         if not self.widgetModel.atFrameBeginning():
-            self.labels[self.widgetModel.current_word_ind - 1].config(bg='white')
+            if self.widgetModel.previousWordIncorrect:
+                self.labels[self.widgetModel.current_word_ind - 1].config(bg='red')
+            else:
+                self.labels[self.widgetModel.current_word_ind - 1].config(bg='white')
         self.labels[self.widgetModel.current_word_ind].config(bg='grey')
 
     def deleteAllRows(self):

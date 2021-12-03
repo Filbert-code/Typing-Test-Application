@@ -14,20 +14,23 @@ class WidgetModel:
         self.row_of_words = [word[:-1] for word in self.row_of_words]
         self.active_labels = []
 
-        self.score = 0
         self.started = False
         self.ended = False
         self.resetTriggered = False
 
         self.char_count = 0
+        self.mistyped_count = 0
+        self.previousWordIncorrect = False
 
     def userInputMatchWordCheck(self):
         # print("User input: " + self.current_user_input[:-1] +
         #       ", Word: " + self.active_labels[self.current_word_ind].cget('text'))
         if self.userHasReachedFrameEnd():
             self.at_frame_end = True
-        if self.current_user_input[:-1] == self.active_labels[self.current_word_ind].cget('text'):
-            self.score += 1
+        if self.current_user_input[:-1] != self.active_labels[self.current_word_ind].cget('text'):
+            # used in MovingText to highlight incorrect word in red
+            self.previousWordIncorrect = True
+            self.mistyped_count += 1
             return True
         return False
 

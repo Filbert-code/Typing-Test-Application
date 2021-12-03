@@ -17,14 +17,16 @@ class StatsFrame(tk.Frame):
         self.update_self()
 
     def createLabels(self):
-        self.wpmScoreLabel = tk.Label(self, text="WPM: ", font=("Courier", 16))
+        self.wpmScoreLabel = tk.Label(self, text="WPM: 0.00", font=("Courier", 16))
         self.wpmScoreLabel.grid(row=0, column=0)
 
     def update_self(self):
         print("(" + str(self.widgetModel.started) + ", " + str(self.widgetModel.ended) + ")")
         if self.widgetModel.started and self.widgetModel.ended:
             num_of_words = (self.widgetModel.char_count / 5.0)
-            self.wpmScoreLabel.config(text="WPM: {}".format(str(round(num_of_words, 2))))
+            # print(str(num_of_words))
+            # print(str(self.widgetModel.mistyped_count))
+            self.wpmScoreLabel.config(text="WPM: {}".format(str(round(num_of_words - self.widgetModel.mistyped_count, 2))))
         self.parent.parent.after(100, self.update_self)
 
 
