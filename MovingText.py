@@ -13,7 +13,7 @@ class MovingText(tk.Frame):
         self.parent = parent
         self.widgetModel = self.parent.widgetModel
 
-        self.config(bg='white', width=700, height=75)
+        self.config(width=960, height=75, bg='black')
 
         # widgets for the frame
         self.labelFrames = []
@@ -37,10 +37,10 @@ class MovingText(tk.Frame):
     def createNextLabelRow(self):
         frame = tk.Frame(self)
         # max width for each frame is 600
-        while frame.winfo_reqwidth() < 601:
+        while frame.winfo_reqwidth() < 801:
             # need to call in order to get the correct winfo_reqwidth value
             self.update()
-            label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=("TkDefaultFont", 20), padx=8)
+            label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=("TkDefaultFont", 20), padx=8, fg='white', bg='black')
             label.pack(side=tk.LEFT)
             self.labels.append(label)
         # the last label overreaches the boundary, remove it
@@ -90,7 +90,7 @@ class MovingText(tk.Frame):
             if self.widgetModel.previousWordIncorrect:
                 self.labels[self.widgetModel.current_word_ind - 1].config(bg='red')
             else:
-                self.labels[self.widgetModel.current_word_ind - 1].config(bg='white')
+                self.labels[self.widgetModel.current_word_ind - 1].config(bg='black')
         self.labels[self.widgetModel.current_word_ind].config(bg='grey')
 
     def deleteAllRows(self):

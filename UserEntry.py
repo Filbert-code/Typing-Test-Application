@@ -10,10 +10,9 @@ class UserEntry(tk.Frame):
         self.parent = parent
         self.widgetModel = self.parent.widgetModel
 
-        self.config(bg='lightseagreen', width=200, height=42)
-        self.grid_propagate(0)
+        self.config(bg='lightseagreen')
 
-        self.entry = tk.Entry(self, font=("Courier", 12))
+        self.entry = tk.Entry(self, font=("TkDefaultFont", 20), bg='black', fg='white', insertbackground='white')
         self.entry.grid(row=0, column=0)
         self.entry.focus_set()
         self.entry.bind("<Key>", self.userPressedKey)

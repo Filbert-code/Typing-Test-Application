@@ -20,7 +20,7 @@ class Timer(tk.Frame):
         self.updateTime()
 
     def createTimer(self):
-        self.timerLabel = tk.Label(self, text=str(self.time.get()), font=("Courier", 12))
+        self.timerLabel = tk.Label(self, text=str(self.time.get()), font=("TkDefaultFont", 24), bg='black', fg='white')
         self.timerLabel.grid(row=0, column=0)
 
     def updateTime(self):

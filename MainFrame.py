@@ -17,31 +17,33 @@ class MainFrame(tk.Frame):
         # configurations for the outer-most frame
         self.parent = parent
         self.parent.title("The Ultimate Typing Test")
-        self.config(bg='lightseagreen')
-        self.grid(row=0, column=0)
-        self.parent.minsize(668, 170)
+        self.bg = tk.PhotoImage(file="background.png")
+        self.bgLabel = tk.Label(self, image=self.bg)
+        self.bgLabel.place(x=0, y=0, relwidth=1, relheight=1)
+        self.pack(anchor=tk.CENTER)
+        self.parent.config(bg='lightseagreen')
+        self.parent.minsize(960, 300)
         # self.grid_propagate(0)
-        print(font.names())
 
         # get the data and create an instance of WidgetModel (that holds all persistent data)
         self.widgetModel = WidgetModel()
 
         # configure the subframes
         self.timer = Timer(self)
-        self.timer.pack(anchor=tk.CENTER)
+        self.timer.pack(anchor=tk.CENTER, pady=20)
         
         self.movingText = MovingText(self)
-        self.movingText.pack(anchor=tk.CENTER, padx=20, pady=(40, 0))
+        self.movingText.pack(anchor=tk.CENTER)
         self.movingText.grid_propagate(0)
 
         self.statsFrame = StatsFrame(self)
-        self.statsFrame.pack(anchor=tk.CENTER, pady=40)
+        self.statsFrame.pack(anchor=tk.CENTER, pady=(30, 10))
 
         self.retryButton = RetryButton(self)
         self.retryButton.pack(anchor=tk.CENTER)
 
         self.entry = UserEntry(self)
-        self.entry.pack(anchor=tk.CENTER)
+        self.entry.pack(anchor=tk.CENTER, pady=(0, 20))
 
 
     def totalReset(self):

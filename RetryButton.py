@@ -15,7 +15,7 @@ class RetryButton(tk.Frame):
         self.createRetryButton()
 
     def createRetryButton(self):
-        self.button = tk.Button(self, text="RETRY", command=self.reset)
+        self.button = tk.Button(self, text="RETRY", command=self.reset, font=("TkDefaultFont", 15))
         self.button.grid(row=0, column=0)
 
     def reset(self):
