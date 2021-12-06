@@ -17,7 +17,7 @@ class StatsFrame(tk.Frame):
         self.update_self()
 
     def createLabels(self):
-        self.wpmScoreLabel = tk.Label(self, text="WPM: 00.00", font=("TkDefaultFont", 25), bg="black", fg='white')
+        self.wpmScoreLabel = tk.Label(self, text="WPM: 71.52", font=("TkDefaultFont", 25), bg="black", fg='white')
         self.wpmScoreLabel.grid(row=0, column=0)
 
     def update_self(self):
