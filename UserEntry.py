@@ -37,7 +37,7 @@ class UserEntry(tk.Frame):
         self.parent.parent.after(100, self.update_self)
 
     def userPressedKey(self, key):
-        if key.char.isalpha():
+        if key.char.isalpha() and not self.widgetModel.ended:
             self.widgetModel.char_count += 1
 
     def reset(self):
