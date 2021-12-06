@@ -37,7 +37,7 @@ class MovingText(tk.Frame):
     def createNextLabelRow(self):
         frame = tk.Frame(self)
         # max width for each frame is 600
-        while frame.winfo_reqwidth() < 801:
+        while frame.winfo_reqwidth() < 881:
             # need to call in order to get the correct winfo_reqwidth value
             self.update()
             label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=("TkDefaultFont", 20), padx=8, fg='white', bg='black')
