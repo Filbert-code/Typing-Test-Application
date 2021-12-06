@@ -36,20 +36,50 @@ class MovingText(tk.Frame):
     # returns a new frame with labels of words
     def createNextLabelRow(self):
         frame = tk.Frame(self)
+        # track the label being appended so that we can check its width
+        current_label = None
+        frame_width = None
+        self.update()
+
         # max width for each frame is 600
-        while frame.winfo_reqwidth() < 881:
+        # average label width is 85, therefore 960 - 85 = 875
+        while frame.winfo_reqwidth() < 900:
             # need to call in order to get the correct winfo_reqwidth value
             self.update()
-            label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=("TkDefaultFont", 20), padx=8, fg='white', bg='black')
-            label.pack(side=tk.LEFT)
-            self.labels.append(label)
-        # the last label overreaches the boundary, remove it
+            current_label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=("TkDefaultFont", 20), padx=8, fg='white', bg='black')
+            current_label.pack(side=tk.LEFT)
+            self.labels.append(current_label)
+            if frame.winfo_reqwidth() < 900:
+                frame_width = frame.winfo_reqwidth()
+            print("current width: {}, current_label width: {}".format(frame_width, current_label.winfo_reqwidth()))
+
         self.labels[-1].destroy()
         del self.labels[-1]
+
+        # need this value to be as close to 0 as possible so that the frame takes up the entire space
+        print(frame.winfo_reqwidth())
+        dist_to_end = 960 - frame.winfo_reqwidth()
+        print("First dist_to_end value: {}".format(dist_to_end))
+        # threshold for maximum space on the right side of the frame
+        target_value = 30
+        while dist_to_end > target_value or dist_to_end < 0:
+            # the last label overreaches the boundary, remove it
+            self.labels[-1].destroy()
+            del self.labels[-1]
+            current_label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=("TkDefaultFont", 20),
+                                     padx=8, fg='white', bg='black')
+            current_label.pack(side=tk.LEFT)
+            self.labels.append(current_label)
+            dist_to_end = 960 - (frame_width + current_label.winfo_reqwidth())
+            print("New dist_to_end value = {}".format(dist_to_end))
+
+
         # end label is used to trigger adding a new row of words
         self.endLabels.append(self.labels[-1])
         self.widgetModel.active_labels = self.labels
         return frame
+
+
 
     def waitingForStart(self):
         if not self.widgetModel.started and not self.widgetModel.ended:
