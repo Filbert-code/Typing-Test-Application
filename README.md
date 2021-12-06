@@ -1,6 +1,7 @@
 # Typing-Test-Application
 
 (Animation included)
+
 A GUI program that measures a user's typing speed based on characters typed per-minute divided by 
 the average character count for words (which is 5) and subtracting by the number of incorrect words per-minute.
 
