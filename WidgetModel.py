@@ -23,16 +23,17 @@ class WidgetModel:
         self.previousWordIncorrect = False
 
     def userInputMatchWordCheck(self):
-        # print("User input: " + self.current_user_input[:-1] +
-        #       ", Word: " + self.active_labels[self.current_word_ind].cget('text'))
         if self.userHasReachedFrameEnd():
             self.at_frame_end = True
-        if self.current_user_input[:-1] != self.active_labels[self.current_word_ind].cget('text'):
+
+        correct_word = self.active_labels[self.current_word_ind].cget('text')
+        if self.current_user_input[:-1] != correct_word:
             # used in MovingText to highlight incorrect word in red
             self.previousWordIncorrect = True
             self.mistyped_count += 1
-            return True
-        return False
+
+        self.char_count += len(correct_word) + 1
+        self.current_word_ind += 1
 
     def userHasReachedFrameEnd(self):
         if not self.current_frame:

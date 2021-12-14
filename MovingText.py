@@ -13,7 +13,7 @@ class MovingText(tk.Frame):
         self.parent = parent
         self.widgetModel = self.parent.widgetModel
 
-        self.config(width=960, height=75, bg='black')
+        self.config(width=960, height=80, bg='black')
 
         # widgets for the frame
         self.labelFrames = []
@@ -46,7 +46,7 @@ class MovingText(tk.Frame):
         while frame.winfo_reqwidth() < 900:
             # need to call in order to get the correct winfo_reqwidth value
             self.update()
-            current_label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=(self.parent.typingFont, 20), padx=8, fg='white', bg='black')
+            current_label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=(self.parent.typingFont, 22), padx=8, fg='white', bg='black')
             current_label.pack(side=tk.LEFT)
             self.labels.append(current_label)
             if frame.winfo_reqwidth() < 900:
@@ -63,7 +63,7 @@ class MovingText(tk.Frame):
             # the last label overreaches the boundary, remove it
             self.labels[-1].destroy()
             del self.labels[-1]
-            current_label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=(self.parent.typingFont, 20),
+            current_label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=(self.parent.typingFont, 22),
                                      padx=8, fg='white', bg='black')
             current_label.pack(side=tk.LEFT)
             self.labels.append(current_label)
