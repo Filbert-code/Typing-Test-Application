@@ -73,13 +73,10 @@ class MovingText(tk.Frame):
             dist_to_end = 960 - (frame_width + current_label.winfo_reqwidth())
             print("New dist_to_end value = {}".format(dist_to_end))
 
-
         # end label is used to trigger adding a new row of words
         self.endLabels.append(self.labels[-1])
         self.widgetModel.active_labels = self.labels
         return frame
-
-
 
     def waitingForStart(self):
         if not self.widgetModel.started and not self.widgetModel.ended:
