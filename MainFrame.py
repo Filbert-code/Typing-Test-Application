@@ -8,7 +8,7 @@ from RetryButton import RetryButton
 from StatsFrame import StatsFrame
 from WidgetModel import WidgetModel
 from TopicEntry import TopicEntry
-import pyglet, tkinter
+import pyglet
 
 
 class MainFrame(tk.Frame):
@@ -58,6 +58,13 @@ class MainFrame(tk.Frame):
         self.movingText.reset()
         self.entry.reset()
         self.timer.reset()
+
+    def newTopicReset(self, new_words):
+        self.widgetModel.reset(new_words)
+        self.movingText.reset()
+        self.entry.reset()
+        self.timer.reset()
+
 
 
 if __name__ == "__main__":

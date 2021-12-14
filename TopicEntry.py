@@ -1,4 +1,5 @@
 import tkinter as tk
+import wikipedia
 
 
 class TopicEntry(tk.Frame):
@@ -16,5 +17,16 @@ class TopicEntry(tk.Frame):
         self.button = tk.Button(self, font=(self.parent.typingFont, 10), text='Change Topic!')
         self.button.grid(row=0, column=1)
 
+        self.update_self()
+        self.button.bind("<Button-1>", self.buttonClicked)
+
+    def buttonClicked(self, key):
+        phrase = self.entry.get()
+        new_words = wikipedia.summary(phrase).split(' ')
+        self.parent.newTopicReset(new_words)
+
+    def update_self(self):
+        self.widgetModel.current_topic_input = self.entry.get()
+        self.parent.parent.after(100, self.update_self)
 
 

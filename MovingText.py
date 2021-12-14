@@ -46,7 +46,8 @@ class MovingText(tk.Frame):
         while frame.winfo_reqwidth() < 900:
             # need to call in order to get the correct winfo_reqwidth value
             self.update()
-            current_label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=(self.parent.typingFont, 22), padx=8, fg='white', bg='black')
+            current_label = tk.Label(frame, text=self.widgetModel.row_of_words[self.widgetModel.label_ind], font=(self.parent.typingFont, 22), padx=8, fg='white', bg='black')
+            self.widgetModel.label_ind += 1
             current_label.pack(side=tk.LEFT)
             self.labels.append(current_label)
             if frame.winfo_reqwidth() < 900:

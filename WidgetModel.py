@@ -1,11 +1,14 @@
 from random import randrange
+import wikipedia
 
 
 class WidgetModel:
     def __init__(self):
         self.word_bank = open("1000MostCommonWords.txt").readlines()
         self.current_user_input = ""
+        self.current_topic_input = ""
         self.current_word_ind = 0
+        self.label_ind = 0
         self.current_label = None
         self.current_frame = None
         self.at_frame_end = False
@@ -47,7 +50,7 @@ class WidgetModel:
             return True
         return False
 
-    def reset(self):
+    def reset(self, new_row_of_words=None):
         self.current_user_input = ""
         self.current_word_ind = 0
         self.current_label = None
@@ -58,7 +61,10 @@ class WidgetModel:
         self.previousWordIncorrect = False
         self.started = False
         self.ended = False
-        self.row_of_words = [self.word_bank[randrange(1000)] for num in range(0, 500)]
-        self.row_of_words = [word[:-1] for word in self.row_of_words]
+        if not new_row_of_words:
+            self.row_of_words = [self.word_bank[randrange(1000)] for num in range(0, 500)]
+            self.row_of_words = [word[:-1] for word in self.row_of_words]
+        else:
+            self.row_of_words = new_row_of_words
         self.active_labels = []
 
