@@ -46,32 +46,28 @@ class MovingText(tk.Frame):
         while frame.winfo_reqwidth() < 900:
             # need to call in order to get the correct winfo_reqwidth value
             self.update()
-            current_label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=("TkDefaultFont", 20), padx=8, fg='white', bg='black')
+            current_label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=(self.parent.typingFont, 20), padx=8, fg='white', bg='black')
             current_label.pack(side=tk.LEFT)
             self.labels.append(current_label)
             if frame.winfo_reqwidth() < 900:
                 frame_width = frame.winfo_reqwidth()
-            print("current width: {}, current_label width: {}".format(frame_width, current_label.winfo_reqwidth()))
 
         self.labels[-1].destroy()
         del self.labels[-1]
 
         # need this value to be as close to 0 as possible so that the frame takes up the entire space
-        print(frame.winfo_reqwidth())
         dist_to_end = 960 - frame.winfo_reqwidth()
-        print("First dist_to_end value: {}".format(dist_to_end))
         # threshold for maximum space on the right side of the frame
         target_value = 30
         while dist_to_end > target_value or dist_to_end < 0:
             # the last label overreaches the boundary, remove it
             self.labels[-1].destroy()
             del self.labels[-1]
-            current_label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=("TkDefaultFont", 20),
+            current_label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=(self.parent.typingFont, 20),
                                      padx=8, fg='white', bg='black')
             current_label.pack(side=tk.LEFT)
             self.labels.append(current_label)
             dist_to_end = 960 - (frame_width + current_label.winfo_reqwidth())
-            print("New dist_to_end value = {}".format(dist_to_end))
 
         # end label is used to trigger adding a new row of words
         self.endLabels.append(self.labels[-1])

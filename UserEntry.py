@@ -1,3 +1,4 @@
+import string
 import tkinter as tk
 
 
@@ -37,8 +38,9 @@ class UserEntry(tk.Frame):
         self.parent.parent.after(100, self.update_self)
 
     def userPressedKey(self, key):
-        if key.char.isalpha() and not self.widgetModel.ended:
+        if key.char.isalpha() or (key.char and key.char in string.punctuation) and not self.widgetModel.ended:
             self.widgetModel.char_count += 1
+            print(self.widgetModel.char_count)
 
     def reset(self):
         self.entry.config(state='normal')

@@ -7,6 +7,7 @@ from Timer import Timer
 from RetryButton import RetryButton
 from StatsFrame import StatsFrame
 from WidgetModel import WidgetModel
+import pyglet, tkinter
 
 
 class MainFrame(tk.Frame):
@@ -28,6 +29,9 @@ class MainFrame(tk.Frame):
         # get the data and create an instance of WidgetModel (that holds all persistent data)
         self.widgetModel = WidgetModel()
 
+        self.typingFont = "Raleway"
+        pyglet.font.add_file("Raleway-Medium.ttf")
+
         # configure the subframes
         self.timer = Timer(self)
         self.timer.pack(anchor=tk.CENTER, pady=20)
@@ -44,7 +48,6 @@ class MainFrame(tk.Frame):
 
         self.entry = UserEntry(self)
         self.entry.pack(anchor=tk.CENTER, pady=(0, 20))
-
 
     def totalReset(self):
         self.widgetModel.reset()
