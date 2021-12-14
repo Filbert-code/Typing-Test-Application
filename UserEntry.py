@@ -1,4 +1,3 @@
-import string
 import tkinter as tk
 
 
@@ -15,7 +14,7 @@ class UserEntry(tk.Frame):
 
         self.current_word = None
 
-        self.entry = tk.Entry(self, font=("TkDefaultFont", 20), bg='black', fg='white', insertbackground='white')
+        self.entry = tk.Entry(self, font=(self.parent.typingFont, 20), bg='black', fg='white', insertbackground='white')
         self.entry.grid(row=0, column=0)
         self.entry.focus_set()
         # self.entry.bind("<Key>", self.userPressedKey)

@@ -21,7 +21,7 @@ class Timer(tk.Frame):
 
     def createTimer(self):
         self.timerLabel = tk.Label(self, text=str(self.time.get()), font=("TkDefaultFont", 24), bg='black', fg='white')
-        self.timerLabel.grid(row=0, column=0)
+        self.timerLabel.pack(side=tk.LEFT)
 
     def updateTime(self):
         if self.time.get() == 0:

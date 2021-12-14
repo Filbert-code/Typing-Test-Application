@@ -7,6 +7,7 @@ from Timer import Timer
 from RetryButton import RetryButton
 from StatsFrame import StatsFrame
 from WidgetModel import WidgetModel
+from TopicEntry import TopicEntry
 import pyglet, tkinter
 
 
@@ -34,7 +35,7 @@ class MainFrame(tk.Frame):
 
         # configure the subframes
         self.timer = Timer(self)
-        self.timer.pack(anchor=tk.CENTER, pady=20)
+        self.timer.pack(anchor=tk.CENTER, pady=10)
         
         self.movingText = MovingText(self)
         self.movingText.pack(anchor=tk.CENTER)
@@ -48,6 +49,9 @@ class MainFrame(tk.Frame):
 
         self.entry = UserEntry(self)
         self.entry.pack(anchor=tk.CENTER, pady=(0, 20))
+
+        self.topicEntry = TopicEntry(self)
+        self.topicEntry.place(relx=1.0, rely=0.0, x=-50, y=20, anchor="ne")
 
     def totalReset(self):
         self.widgetModel.reset()
