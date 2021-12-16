@@ -51,7 +51,7 @@ class MainFrame(tk.Frame):
         self.entry.pack(anchor=tk.CENTER, pady=(0, 20))
 
         self.topicEntry = TopicEntry(self)
-        self.topicEntry.place(relx=1.0, rely=0.0, x=-45, y=12, anchor="ne")
+        self.topicEntry.place(relx=1.0, rely=0.0, x=-125, y=12, anchor="ne")
 
 
     def totalReset(self):
