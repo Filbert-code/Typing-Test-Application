@@ -1,7 +1,17 @@
 import tkinter as tk
-from time import sleep
-
 import wikipedia
+
+
+def getRidOfReturnsAndSpaces(list):
+    for i, s in enumerate(list):
+        if s == " ":
+            del list[i]
+            continue
+        if '\n' in s:
+            words = s.split('\n')
+            list[i] = words[0]
+            list.insert(i + 1, words[1])
+    return list
 
 
 class TopicEntry(tk.Frame):
@@ -27,29 +37,22 @@ class TopicEntry(tk.Frame):
         self.button.bind("<Button-1>", self.buttonClicked)
 
     def buttonClicked(self, key):
-
+        self.entry.delete(0, tk.END)
         self.label.config(text='loading...')
         self.update()
-        phrase = self.entry.get()
-        page = wikipedia.page(phrase)
+        try:
+            page = wikipedia.page(self.entry.get())
+        except wikipedia.exceptions.PageError:
+            self.label.config(text='Page Not Found.')
+            return
+        except wikipedia.exceptions.WikipediaException:
+            self.label.config(text='An Error Occurred.')
+            return
         title = page.title
-        new_words = wikipedia.summary(phrase).split(' ')
-
-        new_words = self.getRidOfReturnsAndSpaces(new_words)
+        new_words = wikipedia.summary(self.entry.get()).split(' ')
+        new_words = getRidOfReturnsAndSpaces(new_words)
         self.parent.newTopicReset(new_words)
         self.label.config(text=title)
-        self.entry.delete(0, tk.END)
-
-    def getRidOfReturnsAndSpaces(self, list):
-        for i, s in enumerate(list):
-            if '\n' in s:
-                words = s.split('\n')
-                list[i] = words[0]
-                list.insert(i + 1, words[1])
-                print("Found one: {}, {}".format(words[0], words[1]))
-            if s == ' ':
-                del list[i]
-        return list
 
     def update_self(self):
         self.widgetModel.current_topic_input = self.entry.get()
