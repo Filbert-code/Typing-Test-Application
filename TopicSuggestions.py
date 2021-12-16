@@ -14,18 +14,29 @@ class TopicSuggestions(tk.Frame):
         self.buttons = []
 
         self.num_of_suggestions = 5
-        self.createButtons()
 
-    def createButtons(self):
-        for i in range(self.num_of_suggestions):
-            btn = tk.Button(self, text='Example Button', font=('Raleway', 12), wraplength=300, width=23, command=self.getSuggestions)
+        self.suggestion_btn = tk.Button(self.parent.parent, font=('Raleway', 10), text='Suggest!', command=self.createDropdownList)
+        self.suggestion_btn.place(relx=1.0, rely=0.0, x=-50, y=72, anchor="ne")
+
+
+    def createButtons(self, suggestions):
+        for i, suggestion in enumerate(suggestions):
+            btn = tk.Button(self, text=suggestion, font=('Raleway', 12), wraplength=300, width=23, command=self.destroy)
             btn.grid(row=i, column=0)
             self.buttons.append(btn)
 
     def getSuggestions(self):
         search_phrase = self.parent.entry.get()
-        print(wikipedia.search(search_phrase))
+        suggestions = wikipedia.search(search_phrase)
+        if len(suggestions) < 5:
+            self.num_of_suggestions = len(suggestions)
+            return suggestions[:len(suggestions)]
+        else:
+            self.num_of_suggestions = 5
+            return suggestions[:5]
 
+    def createDropdownList(self):
+        self.createButtons(self.getSuggestions())
 
     def update_self(self):
         pass

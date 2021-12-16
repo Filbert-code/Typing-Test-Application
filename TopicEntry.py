@@ -50,11 +50,9 @@ class TopicEntry(tk.Frame):
         self.entry.grid(row=1, column=0)
 
         self.button = tk.Button(self.parent, font=(self.parent.typingFont, 12), text='CHANGE TOPIC!', overrelief=tk.RAISED, wraplength=80)
-        # self.button.grid(row=0, column=1, rowspan=2, padx=2, pady=2)
         self.button.place(relx=1.0, rely=0.0, x=-40, y=12, anchor="ne")
 
         self.suggestions = TopicSuggestions(self)
-        # self.suggestions.place(relx=1.0, rely=0.0, x=-136, y=72, anchor="ne")
         self.suggestions.grid(row=2, column=0)
 
         self.img1 = None
