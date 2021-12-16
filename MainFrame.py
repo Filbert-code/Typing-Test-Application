@@ -35,14 +35,14 @@ class MainFrame(tk.Frame):
 
         # configure the subframes
         self.timer = Timer(self)
-        self.timer.pack(anchor=tk.CENTER, pady=10)
+        self.timer.pack(anchor=tk.CENTER, pady=(10, 20))
         
         self.movingText = MovingText(self)
         self.movingText.pack(anchor=tk.CENTER)
         self.movingText.grid_propagate(0)
 
         self.statsFrame = StatsFrame(self)
-        self.statsFrame.pack(anchor=tk.CENTER, pady=(30, 10))
+        self.statsFrame.pack(anchor=tk.CENTER, pady=(20, 20))
 
         self.retryButton = RetryButton(self)
         self.retryButton.pack(anchor=tk.CENTER)
@@ -51,7 +51,8 @@ class MainFrame(tk.Frame):
         self.entry.pack(anchor=tk.CENTER, pady=(0, 20))
 
         self.topicEntry = TopicEntry(self)
-        self.topicEntry.place(relx=1.0, rely=0.0, x=-50, y=20, anchor="ne")
+        self.topicEntry.place(relx=1.0, rely=0.0, x=-45, y=12, anchor="ne")
+
 
     def totalReset(self):
         self.widgetModel.reset()

@@ -41,7 +41,7 @@ class WidgetModel:
     def userHasReachedFrameEnd(self):
         if not self.current_frame:
             return False
-        if self.current_label == self.current_frame.winfo_children()[-1]:
+        if self.current_label == self.current_frame.winfo_children()[-2]:
             return True
         return False
 
@@ -67,4 +67,5 @@ class WidgetModel:
         else:
             self.row_of_words = new_row_of_words
         self.active_labels = []
+        self.label_ind = 0
 

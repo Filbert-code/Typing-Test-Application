@@ -43,4 +43,5 @@ class UserEntry(tk.Frame):
     def reset(self):
         self.entry.config(state='normal')
         self.entry.delete(0, tk.END)
+        self.entry.focus_set()
         self.update_self()

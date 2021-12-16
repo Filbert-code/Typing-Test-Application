@@ -10,6 +10,8 @@ class StatsFrame(tk.Frame):
         self.parent = parent
         self.widgetModel = self.parent.widgetModel
 
+        self.config(bg='black', relief=tk.SUNKEN, bd=2)
+
         # create stats elements
         self.wpmScoreLabel = None
 
