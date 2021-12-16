@@ -19,7 +19,6 @@ class WidgetModel:
 
         self.started = False
         self.ended = False
-        self.resetTriggered = False
 
         self.char_count = 0
         self.mistyped_count = 0
