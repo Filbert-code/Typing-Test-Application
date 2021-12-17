@@ -3,6 +3,7 @@ from tkinter import ttk
 import timeit
 
 import wikipedia
+from wikipedia import WikipediaException
 
 
 class TopicSuggestions(tk.Frame):
@@ -19,7 +20,6 @@ class TopicSuggestions(tk.Frame):
 
         self.num_of_suggestions = 5
 
-        self.createDropdownList()
         self.update_buttons()
 
     def createButtons(self, suggestions):
@@ -30,9 +30,7 @@ class TopicSuggestions(tk.Frame):
                 phrase = phrase.replace(' ', '_')
                 self.parent.entry.delete(0, tk.END)
                 self.parent.entry.insert(0, phrase)
-                for buttons in self.buttons:
-                    buttons.destroy()
-                self.buttons = []
+                self.deleteSuggestions()
             btn = tk.Button(self.buttons_frame, text=suggestion, font=('Raleway', 12), wraplength=300,
                             width=23, command=applySuggestion)
             btn.grid(row=i + 1, column=0)
@@ -41,7 +39,11 @@ class TopicSuggestions(tk.Frame):
 
     def getSuggestions(self):
         search_phrase = self.parent.entry.get()
-        suggestions = wikipedia.search(search_phrase)
+        try:
+            suggestions = wikipedia.search(search_phrase)
+        except WikipediaException:
+            print('Couldn\'t find that suggestion...')
+            return []
         if len(suggestions) < 5:
             self.num_of_suggestions = len(suggestions)
             return suggestions[:len(suggestions)]
@@ -52,12 +54,20 @@ class TopicSuggestions(tk.Frame):
     def createDropdownList(self):
         self.createButtons(self.getSuggestions())
 
+    def deleteSuggestions(self):
+        for buttons in self.buttons:
+            buttons.destroy()
+        self.buttons = []
+
     def update_buttons(self):
         start = timeit.default_timer()
-        if len(self.buttons) != 0:
-            for i, suggestion in enumerate(self.getSuggestions()):
-                self.buttons[i].config(text=suggestion)
+        if self.focus_get() == self.parent.entry:
+            new_suggestions = self.getSuggestions()
+            if len(new_suggestions) != 0:
+                self.createDropdownList()
+            else:
+                self.deleteSuggestions()
             end = timeit.default_timer()
             # print(end-start)
-        self.parent.parent.parent.after(400, self.update_buttons)
+        self.parent.parent.parent.after(300, self.update_buttons)
 
