@@ -6,7 +6,6 @@ import re
 def getWikiPageWords(input):
     url_prefix = 'https://en.wikipedia.org/wiki/'
     html = urlopen(url_prefix + input)
-
     soup = BeautifulSoup(html, 'html.parser')
     all_ps = soup.find_all(lambda tag: tag.name == 'p' and not tag.attrs, limit=5)
     all_ps = [s.get_text() for s in all_ps]

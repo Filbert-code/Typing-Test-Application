@@ -20,9 +20,15 @@ class TopicSuggestions(tk.Frame):
 
     def createButtons(self, suggestions):
         for i, suggestion in enumerate(suggestions):
-            btn = tk.Button(self, text=suggestion, font=('Raleway', 12), wraplength=300, width=23, command=self.destroy)
+            def applySuggestion(phrase=suggestion):
+                self.parent.entry.delete(0, tk.END)
+                self.parent.entry.insert(0, phrase)
+            btn = tk.Button(self, text=suggestion, font=('Raleway', 12), wraplength=300,
+                            width=23, command=applySuggestion)
             btn.grid(row=i, column=0)
             self.buttons.append(btn)
+
+
 
     def getSuggestions(self):
         search_phrase = self.parent.entry.get()
