@@ -6,6 +6,12 @@ from PIL import Image, ImageTk, UnidentifiedImageError
 from urllib.request import urlopen
 from io import BytesIO
 import wikipedia
+from WikiRequests import getWikiPageWords
+import warnings
+
+warnings.catch_warnings()
+
+warnings.simplefilter("ignore")
 
 
 def getRidOfReturnsAndSpaces(list):
@@ -66,18 +72,8 @@ class TopicEntry(tk.Frame):
         self.entry.delete(0, tk.END)
         self.label.config(text='loading...')
         self.update()
-        try:
-            page = wikipedia.page(phrase)
-            self.createImages(page)
-        except wikipedia.exceptions.PageError:
-            self.label.config(text='Page Not Found.')
-            return
-        except wikipedia.exceptions.WikipediaException:
-            self.label.config(text='An Error Occurred.')
-            return
-        title = page.title
-        new_words = wikipedia.summary(phrase).split(' ')
-        new_words = getRidOfReturnsAndSpaces(new_words)
+        title = phrase
+        new_words = getWikiPageWords(phrase).split(' ')
         self.parent.newTopicReset(new_words)
         self.label.config(text=title)
         self.button.config(relief=tk.RAISED)
@@ -86,7 +82,6 @@ class TopicEntry(tk.Frame):
         urls = []
         url_index = 0
         while len(urls) < 4:
-            # print(page.images[url_index][-4:])
             if page.images[url_index][-4:].lower() == '.jpg':
                 urls.append(page.images[url_index])
             url_index += 1

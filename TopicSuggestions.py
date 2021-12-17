@@ -18,7 +18,6 @@ class TopicSuggestions(tk.Frame):
         self.suggestion_btn = tk.Button(self.parent.parent, font=('Raleway', 10), text='Suggest!', command=self.createDropdownList)
         self.suggestion_btn.place(relx=1.0, rely=0.0, x=-50, y=72, anchor="ne")
 
-
     def createButtons(self, suggestions):
         for i, suggestion in enumerate(suggestions):
             btn = tk.Button(self, text=suggestion, font=('Raleway', 12), wraplength=300, width=23, command=self.destroy)
