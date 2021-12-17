@@ -31,6 +31,7 @@ class TopicSuggestions(tk.Frame):
                 self.parent.entry.delete(0, tk.END)
                 self.parent.entry.insert(0, phrase)
                 self.deleteSuggestions()
+                self.parent.button.focus_set()
             btn = tk.Button(self.buttons_frame, text=suggestion, font=('Raleway', 12), wraplength=300,
                             width=23, command=applySuggestion)
             btn.grid(row=i + 1, column=0)
@@ -69,5 +70,5 @@ class TopicSuggestions(tk.Frame):
                 self.deleteSuggestions()
             end = timeit.default_timer()
             # print(end-start)
-        self.parent.parent.parent.after(300, self.update_buttons)
+        self.parent.parent.parent.after(1000, self.update_buttons)
 

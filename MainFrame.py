@@ -59,12 +59,14 @@ class MainFrame(tk.Frame):
         self.movingText.reset()
         self.entry.reset()
         self.timer.reset()
+        self.topicEntry.reset()
 
     def newTopicReset(self, new_words):
         self.widgetModel.reset(new_words)
         self.movingText.reset()
         self.entry.reset()
         self.timer.reset()
+        self.topicEntry.reset()
 
 
 

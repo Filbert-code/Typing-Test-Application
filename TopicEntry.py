@@ -58,7 +58,8 @@ class TopicEntry(tk.Frame):
         self.button = tk.Button(self.parent, font=(self.parent.typingFont, 12), text='CHANGE TOPIC!', overrelief=tk.RAISED, wraplength=80)
         self.button.place(relx=1.0, rely=0.0, x=-40, y=12, anchor="ne")
 
-        TopicSuggestions(self).grid(row=2, column=0)
+        self.suggestions = TopicSuggestions(self)
+        self.suggestions.grid(row=2, column=0)
 
         self.img1 = None
         self.img2 = None
@@ -99,6 +100,9 @@ class TopicEntry(tk.Frame):
         self.img2 = tk.Label(self.parent, image=photos[1])
         self.img2.image = photos[1]
         self.img2.place(relx=0.0, rely=1.0, x=120, y=-30, anchor="sw")
+
+    def reset(self):
+        self.suggestions.deleteSuggestions()
 
     def update_self(self):
         self.widgetModel.current_topic_input = self.entry.get()
