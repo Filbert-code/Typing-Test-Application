@@ -11,24 +11,29 @@ class TopicSuggestions(tk.Frame):
         # parent for this class is a TopicEntry instance
         self.parent = parent
 
+        self.buttons_frame = None
         self.buttons = []
 
         self.num_of_suggestions = 5
 
-        self.suggestion_btn = tk.Button(self.parent.parent, font=('Raleway', 10), text='Suggest!', command=self.createDropdownList)
-        self.suggestion_btn.place(relx=1.0, rely=0.0, x=-50, y=72, anchor="ne")
+        self.createDropdownList()
+
+        # self.suggestion_btn = tk.Button(self.parent.parent, font=('Raleway', 10), text='Suggest!', command=self.createDropdownList)
+        # self.suggestion_btn.place(relx=1.0, rely=0.0, x=-50, y=72, anchor="ne")
 
     def createButtons(self, suggestions):
+        self.buttons_frame = tk.Frame(self)
         for i, suggestion in enumerate(suggestions):
             def applySuggestion(phrase=suggestion):
+                phrase = phrase.replace(' ', '_')
                 self.parent.entry.delete(0, tk.END)
                 self.parent.entry.insert(0, phrase)
-            btn = tk.Button(self, text=suggestion, font=('Raleway', 12), wraplength=300,
+                self.destroy()
+            btn = tk.Button(self.buttons_frame, text=suggestion, font=('Raleway', 12), wraplength=300,
                             width=23, command=applySuggestion)
             btn.grid(row=i, column=0)
             self.buttons.append(btn)
-
-
+        self.buttons_frame.grid(row=0, column=0)
 
     def getSuggestions(self):
         search_phrase = self.parent.entry.get()
