@@ -21,7 +21,8 @@ class WidgetModel:
         self.ended = False
 
         self.char_count = 0
-        self.mistyped_count = 0
+        self.mistyped_word_count = 0
+        self.mistyped_char_count = 0
         self.previousWordIncorrect = False
 
     def userInputMatchWordCheck(self):
@@ -32,7 +33,9 @@ class WidgetModel:
         if self.current_user_input[:-1] != correct_word:
             # used in MovingText to highlight incorrect word in red
             self.previousWordIncorrect = True
-            self.mistyped_count += 1
+            self.mistyped_word_count += 1
+            self.mistyped_char_count += len(self.current_user_input) - 1
+            print(self.mistyped_char_count)
 
         self.char_count += len(correct_word) + 1
         self.current_word_ind += 1
@@ -56,7 +59,8 @@ class WidgetModel:
         self.current_frame = None
         self.at_frame_end = False
         self.char_count = 0
-        self.mistyped_count = 0
+        self.mistyped_word_count = 0
+        self.mistyped_char_count = 0
         self.previousWordIncorrect = False
         self.started = False
         self.ended = False
