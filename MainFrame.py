@@ -41,17 +41,17 @@ class MainFrame(tk.Frame):
         self.movingText.pack(anchor=tk.CENTER)
         self.movingText.grid_propagate(0)
 
-        self.statsFrame = StatsFrame(self)
-        self.statsFrame.pack(anchor=tk.CENTER, pady=(20, 20))
-
         self.retryButton = RetryButton(self)
-        self.retryButton.pack(anchor=tk.CENTER)
+        self.retryButton.pack(anchor=tk.CENTER, pady=(80, 0))
 
         self.entry = UserEntry(self)
         self.entry.pack(anchor=tk.CENTER, pady=(0, 20))
 
         self.topicEntry = TopicEntry(self)
         self.topicEntry.place(relx=1.0, rely=0.0, x=-125, y=12, anchor="ne")
+
+        self.statsFrame = StatsFrame(self)
+        self.statsFrame.place(relx=1.0, rely=1.0, x=-20, y=-167, anchor="ne")
 
 
     def totalReset(self):
@@ -60,6 +60,7 @@ class MainFrame(tk.Frame):
         self.entry.reset()
         self.timer.reset()
         self.topicEntry.reset()
+        self.statsFrame.reset()
 
     def newTopicReset(self, new_words):
         self.widgetModel.reset(new_words)
@@ -67,6 +68,7 @@ class MainFrame(tk.Frame):
         self.entry.reset()
         self.timer.reset()
         self.topicEntry.reset()
+        self.statsFrame.reset()
 
 
 
