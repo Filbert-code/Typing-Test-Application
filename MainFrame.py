@@ -48,10 +48,10 @@ class MainFrame(tk.Frame):
         self.retryButton.pack(anchor=tk.CENTER, pady=(10, 70))
 
         self.topicEntry = TopicEntry(self)
-        self.topicEntry.place(relx=1.0, rely=0.0, x=-95, y=18, anchor="ne")
+        self.topicEntry.place(relx=1.0, rely=0.0, x=-91, y=20, anchor="ne")
 
         self.statsFrame = StatsFrame(self)
-        self.statsFrame.place(relx=1.0, rely=1.0, x=-12, y=-167, anchor="ne")
+        self.statsFrame.place(relx=1.0, rely=1.0, x=0, y=-159, anchor="ne")
 
 
     def totalReset(self):

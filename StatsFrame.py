@@ -11,7 +11,7 @@ class StatsFrame(tk.Frame):
         self.parent = parent
         self.widgetModel = self.parent.widgetModel
 
-        self.config(bg='black', relief=tk.SUNKEN, bd=2)
+        self.config(bg='black', relief=tk.RAISED, bd=4)
 
         # create stats elements
         self.lastRunLabel, self.lastRunDivider = None, None
