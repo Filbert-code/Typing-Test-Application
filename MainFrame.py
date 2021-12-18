@@ -35,23 +35,23 @@ class MainFrame(tk.Frame):
 
         # configure the subframes
         self.timer = Timer(self)
-        self.timer.pack(anchor=tk.CENTER, pady=(10, 20))
+        self.timer.pack(anchor=tk.CENTER, pady=(10, 10))
         
         self.movingText = MovingText(self)
         self.movingText.pack(anchor=tk.CENTER)
         self.movingText.grid_propagate(0)
 
-        self.retryButton = RetryButton(self)
-        self.retryButton.pack(anchor=tk.CENTER, pady=(80, 0))
-
         self.entry = UserEntry(self)
-        self.entry.pack(anchor=tk.CENTER, pady=(0, 20))
+        self.entry.pack(anchor=tk.CENTER, pady=(30, 0))
+
+        self.retryButton = RetryButton(self)
+        self.retryButton.pack(anchor=tk.CENTER, pady=(10, 70))
 
         self.topicEntry = TopicEntry(self)
-        self.topicEntry.place(relx=1.0, rely=0.0, x=-125, y=12, anchor="ne")
+        self.topicEntry.place(relx=1.0, rely=0.0, x=-95, y=18, anchor="ne")
 
         self.statsFrame = StatsFrame(self)
-        self.statsFrame.place(relx=1.0, rely=1.0, x=-20, y=-167, anchor="ne")
+        self.statsFrame.place(relx=1.0, rely=1.0, x=-12, y=-167, anchor="ne")
 
 
     def totalReset(self):
