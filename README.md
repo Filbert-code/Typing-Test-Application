@@ -14,5 +14,5 @@ within the Frame classes themselves.
 
 
 ## Showing how to change topics: 
-### Changing a topic will provide a new set of text to type out.
+##### Changing a topic will provide a new set of text to type out.
 ![Typing-Test-Application](TypingTestRecording2.gif)
