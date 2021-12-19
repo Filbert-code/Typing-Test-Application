@@ -56,48 +56,6 @@ class MovingText(tk.Frame):
         self.widgetModel.active_labels = self.labels
         return frame
 
-    # # returns a new frame with labels of words
-    # def createNextLabelRow(self):
-    #     frame = tk.Frame(self)
-    #     # track the label being appended so that we can check its width
-    #     current_label = None
-    #     frame_width = None
-    #     self.update()
-    #
-    #     # max width for each frame is 600
-    #     # average label width is 85, therefore 960 - 85 = 875
-    #     while frame.winfo_reqwidth() < 900:
-    #         # need to call in order to get the correct winfo_reqwidth value
-    #         self.update()
-    #         current_label = tk.Label(frame, text=self.widgetModel.row_of_words[self.widgetModel.label_ind], font=(self.parent.typingFont, 22), padx=8, fg='white', bg='black')
-    #         self.widgetModel.label_ind += 1
-    #         current_label.pack(side=tk.LEFT)
-    #         self.labels.append(current_label)
-    #         if frame.winfo_reqwidth() < 900:
-    #             frame_width = frame.winfo_reqwidth()
-    #
-    #     self.labels[-1].destroy()
-    #     del self.labels[-1]
-    #
-    #     # need this value to be as close to 0 as possible so that the frame takes up the entire space
-    #     dist_to_end = 960 - frame.winfo_reqwidth()
-    #     # threshold for maximum space on the right side of the frame
-    #     target_value = 30
-    #     while dist_to_end > target_value or dist_to_end < 0:
-    #         # the last label overreaches the boundary, remove it
-    #         self.labels[-1].destroy()
-    #         del self.labels[-1]
-    #         current_label = tk.Label(frame, text=self.widgetModel.row_of_words.pop(), font=(self.parent.typingFont, 22),
-    #                                  padx=8, fg='white', bg='black')
-    #         current_label.pack(side=tk.LEFT)
-    #         self.labels.append(current_label)
-    #         dist_to_end = 960 - (frame_width + current_label.winfo_reqwidth())
-    #
-    #     # end label is used to trigger adding a new row of words
-    #     self.endLabels.append(self.labels[-1])
-    #     self.widgetModel.active_labels = self.labels
-    #     return frame
-
     def waitingForStart(self):
         if not self.widgetModel.started and not self.widgetModel.ended:
             if self.widgetModel.current_user_input:

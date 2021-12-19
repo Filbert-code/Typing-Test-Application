@@ -1,6 +1,4 @@
 import tkinter as tk
-from tkinter import font
-
 from MovingText import MovingText
 from UserEntry import UserEntry
 from Timer import Timer
@@ -24,7 +22,8 @@ class MainFrame(tk.Frame):
         self.bgLabel.place(x=0, y=0, relwidth=1, relheight=1)
         self.pack(anchor=tk.CENTER)
         self.parent.config(bg='lightseagreen')
-        self.parent.minsize(960, 300)
+        self.parent.minsize(960, 340)
+        self.parent.maxsize(960, 340)
         # self.grid_propagate(0)
 
         # get the data and create an instance of WidgetModel (that holds all persistent data)
@@ -33,7 +32,7 @@ class MainFrame(tk.Frame):
         self.typingFont = "Raleway"
         pyglet.font.add_file("Raleway-Medium.ttf")
 
-        # configure the subframes
+        # configure the sub-frames
         self.timer = Timer(self)
         self.timer.pack(anchor=tk.CENTER, pady=(10, 10))
         
@@ -45,14 +44,13 @@ class MainFrame(tk.Frame):
         self.entry.pack(anchor=tk.CENTER, pady=(30, 0))
 
         self.retryButton = RetryButton(self)
-        self.retryButton.pack(anchor=tk.CENTER, pady=(10, 70))
-
-        self.topicEntry = TopicEntry(self)
-        self.topicEntry.place(relx=1.0, rely=0.0, x=-91, y=20, anchor="ne")
+        self.retryButton.pack(anchor=tk.CENTER, pady=(10, 65))
 
         self.statsFrame = StatsFrame(self)
         self.statsFrame.place(relx=1.0, rely=1.0, x=0, y=-159, anchor="ne")
 
+        self.topicEntry = TopicEntry(self)
+        self.topicEntry.place(relx=1.0, rely=0.0, x=-91, y=20, anchor="ne")
 
     def totalReset(self):
         self.widgetModel.reset()
@@ -69,7 +67,6 @@ class MainFrame(tk.Frame):
         self.timer.reset()
         self.topicEntry.reset()
         self.statsFrame.reset()
-
 
 
 if __name__ == "__main__":

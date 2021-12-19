@@ -71,6 +71,8 @@ class StatsFrame(tk.Frame):
     def calculateAccuracy(self):
         total_correct_char = self.widgetModel.char_count
         total_char = (self.widgetModel.char_count + self.widgetModel.mistyped_char_count)
+        if total_char == 0:
+            return 0.0
         return round((total_correct_char / float(total_char)) * 100.0, 2)
 
     def getHighscoresFromFile(self):
