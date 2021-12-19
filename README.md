@@ -9,9 +9,10 @@ This helps to decouple the classes and allows for scalability of the program.
 A single data class, called WidgetModel, is used to store shared data between the Frame classes. The variables are updated
 within the Frame classes themselves. 
 
-## Demoing the user typing: 
+## Showing the user typing experience: 
 ![Typing-Test-Application](TypingTestRecording.gif)
 
 
 ## Showing how to change topics: 
+### Changing a topic will provide a new set of text to type out.
 ![Typing-Test-Application](TypingTestRecording2.gif)
